@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">菜单</string>
+    <string name="hello_world" />
+    <string name="back">Back</string>
+    <string name="personal_center">Personal Center</string>
+    <string name="username">Username</string>
+    <string name="user_phone">User Phone</string>
+    <string name="address_management">Address Management</string>
+    <string name="history_orders">History Orders</string>
+    <string name="image_desc" />
+</resources>

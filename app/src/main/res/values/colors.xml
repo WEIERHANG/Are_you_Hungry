@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="gray">#f7f8f9</color>
+    <color name="dark_gray">#626262</color>
+    <color name="custom_red">#FF0000</color>
+    <color name="meituanGreen">#01c1ae</color>
+    <color name="gray666">#666666</color>
+    <color name="dividerColorFA">#fafafa</color>
+    <color name="dividerColor999">#999</color>
+    <color name="dividerColorF0">#f0f0f0</color>
+    <color name="red">#f00</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="gray81">#CFCFCF</color>
+    <color name="orange">#FFA500</color>
+    <color name="gray61">#9C9C9C</color>
+    <color name="gray71">#B5B5B5</color>
+    <color name="DarkOrange">#FF8C00</color>
+    <color name="LightGrey">#D3D3D3</color>
+    <!--===========================-->
+    <color name="PaleTurquoise">#AFEEEE</color>
+    <color name="DodgerBlue">#1E90FF</color>
+    <color name="meituanGray">#EFEFEF</color>
+    <color name="meituanRed">#E2867B</color>
+</resources>
