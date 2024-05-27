@@ -22,7 +22,7 @@
 <!--MainActivity_login -->
         <activity
 
-            android:name=".MainActivity_login"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,6 +42,7 @@
         <activity android:name=".OrderConfirmationActivity" />
         <activity android:name=".SelectAddressActivity" />
         <activity android:name=".ConfigUtils" />
+        <activity android:name=".MainActivity_login" />
 
 
 

@@ -18,14 +18,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class OrderConfirmationActivity extends AppCompatActivity implements CarAdapter.OnTotalPriceChangeListener {
@@ -97,12 +104,14 @@ public class OrderConfirmationActivity extends AppCompatActivity implements CarA
             calculateTotalPrice();
         });
 
+
         deleteButton.setOnClickListener(v -> {
             adapter1.deleteSelectedItems();
             calculateTotalPrice();
         });
 
         clearButton.setOnClickListener(v -> {
+            clearByCar();
             adapter1.clearAllItems();
             calculateTotalPrice();
         });
@@ -202,6 +211,36 @@ public class OrderConfirmationActivity extends AppCompatActivity implements CarA
             }
         }
     }
+
+
+    /**
+     * 新增方法，用于发送购物车数据到服务器
+     */
+    private void clearByCar() {
+        OkHttpClient client = new OkHttpClient();
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonObject = new JSONObject();
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());  // 修改此行
+        Request request = new Request.Builder()
+                .url(baseUrl+"/shoppingCart/clean")
+                .delete()
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.d("delect", "delect失败: " + e.getMessage());
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Log.d("delect", "成功");
+                } else {
+                    Log.d("delect", "失败: " + response.message());
+                }
+            }
+        });
+    }
+
 
     class DataResponse2 {
         int code;
