@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/consigneeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="收件人" />
+
+    <EditText
+        android:id="@+id/phoneEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="手机号" />
+
+    <EditText
+        android:id="@+id/sexEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="性别" />
+
+    <EditText
+        android:id="@+id/detailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="详细地址" />
+
+    <EditText
+        android:id="@+id/labelEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="标签" />
+
+    <Button
+        android:id="@+id/finishButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="完成" />
+
+</LinearLayout>

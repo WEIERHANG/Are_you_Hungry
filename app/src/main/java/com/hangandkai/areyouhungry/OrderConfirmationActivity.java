@@ -69,6 +69,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements CarA
         }
     }
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         loadConfig();
@@ -132,6 +133,9 @@ public class OrderConfirmationActivity extends AppCompatActivity implements CarA
         fetchShoppingCartData();
     }
 
+
+
+
     private void fetchShoppingCartData() {
         OkHttpClient client = new OkHttpClient();
 
@@ -188,6 +192,7 @@ public class OrderConfirmationActivity extends AppCompatActivity implements CarA
     public void onBackPressed() {
         Intent resultIntent = new Intent();
         resultIntent.putExtra("resetTotalPrice", true);
+
         setResult(RESULT_OK, resultIntent);
         finish();
     }

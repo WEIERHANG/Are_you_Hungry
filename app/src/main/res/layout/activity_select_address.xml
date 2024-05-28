@@ -1,90 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="#ffffff"
-    tools:context=".SelectAddressActivity">
+    android:padding="16dp">
 
     <Button
         android:id="@+id/addAddressButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="输入收货地址"
-        android:layout_gravity="center_horizontal" />
+        android:text="新增地址" />
 
     <LinearLayout
         android:id="@+id/addressInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone"
-        android:layout_marginTop="20dp">
+        android:orientation="horizontal"
+        android:visibility="gone">
 
         <EditText
             android:id="@+id/addressEditText"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="请输入收货地址"
-            android:padding="10dp" />
+            android:layout_weight="1"
+            android:hint="输入地址" />
 
         <Button
             android:id="@+id/confirmButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="确认地址"
-            android:layout_marginTop="10dp" />
+            android:text="确认" />
     </LinearLayout>
 
     <TextView
         android:id="@+id/addressTextView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="18sp"
         android:visibility="gone"
-        android:layout_marginTop="20dp" />
+        android:text="收货地址:" />
 
     <TextView
-        android:id="@+id/selectedItemsTitle"
+        android:id="@+id/noAddressTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="您选购的商品为："
-        android:textSize="18sp"
-        android:layout_marginTop="20dp" />
+        android:text="没有地址"
+        android:gravity="center"
+        android:visibility="gone"
+        android:padding="16dp" />
 
     <ListView
-        android:id="@+id/selectedItemsListView"
+        android:id="@+id/addressListView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"/>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/selectedItemsTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="已选择的商品" />
+
+    <ListView
+        android:id="@+id/selectedItemsListView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/totalPriceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="总金额: " />
+
+    <EditText
+        android:id="@+id/remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:layout_marginTop="20dp">
+        android:hint="订单备注" />
 
-        <TextView
-            android:id="@+id/totalPriceTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="总金额: 0.0"
-            android:textSize="18sp"
-            android:layout_gravity="center_vertical" />
+    <Button
+        android:id="@+id/payButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="支付" />
 
-        <Button
-            android:id="@+id/payButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="支付"
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="20dp"
-            android:layout_marginLeft="20dp" />
-    </LinearLayout>
 </LinearLayout>
