@@ -1,7 +1,9 @@
-package com.hangandkai.areyouhungry;
+package com.hangandkai.areyouhungry;// SelectAddressActivity.java
 
-import android.app.AlertDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,16 +18,18 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.InputStream;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -33,8 +37,16 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import android.content.Intent;
 
 public class SelectAddressActivity extends AppCompatActivity {
+
+    private static final String PREFERENCES_FILE = "MyAppPrefs";
+    private static final String USER_ID_KEY = "userId";
+    private static final String USER_ID_LONG_KEY = "userIdLong";
+
+    private Long userIdLong;
+    private String userIdString;
 
     private Button addAddressButton;
     private LinearLayout addressInputLayout;
@@ -85,6 +97,15 @@ public class SelectAddressActivity extends AppCompatActivity {
         setContentView(R.layout.activity_select_address);
         loadConfig();
 
+        // 获取保存的 userid 和 userIdLong
+        SharedPreferences sharedPref = getSharedPreferences(PREFERENCES_FILE, Context.MODE_PRIVATE);
+        userIdString = sharedPref.getString(USER_ID_KEY, "");
+        userIdLong = sharedPref.getLong(USER_ID_LONG_KEY, -1);
+        if (userIdLong == -1) {
+            Toast.makeText(this, "无法获取用户ID", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         addAddressButton = findViewById(R.id.addAddressButton);
         addressInputLayout = findViewById(R.id.addressInputLayout);
         addressEditText = findViewById(R.id.addressEditText);
@@ -133,8 +154,7 @@ public class SelectAddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String orderNotes = orderNotesEditText.getText().toString().trim();
-                // 处理支付逻辑
-                Toast.makeText(SelectAddressActivity.this, "支付功能未实现\n订单备注: " + orderNotes, Toast.LENGTH_SHORT).show();
+                createOrderAndSubmit(orderNotes);
             }
         });
 
@@ -284,6 +304,70 @@ public class SelectAddressActivity extends AppCompatActivity {
         totalPriceTextView.setText("总金额: " + totalPrice);
     }
 
+    private void createOrderAndSubmit(String orderNotes) {
+        if (selectedAddressPosition == -1) {
+            Toast.makeText(this, "请选择一个地址", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        AddressItem selectedAddress = addressList.get(selectedAddressPosition);
+
+        try {
+            JSONObject orderJson = new JSONObject();
+            orderJson.put("userId", userIdLong);
+            orderJson.put("addressBookId", selectedAddress.id);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
+
+
+                orderJson.put("orderTime", LocalDateTime.now().format(formatter));
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
+
+                orderJson.put("checkoutTime", LocalDateTime.now().format(formatter));
+            }
+            orderJson.put("amount", new BigDecimal(totalPrice));
+            orderJson.put("remark", orderNotes);
+            orderJson.put("userName", "用户名"); // 替换为实际的用户名
+            orderJson.put("phone", selectedAddress.phone);
+            orderJson.put("address", selectedAddress.detail);
+            orderJson.put("consignee", selectedAddress.consignee);
+            orderJson.put("status", 1); // 初始状态为待付款
+
+            String url = baseUrl1 + "/order/submit";
+            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            RequestBody body = RequestBody.create(JSON, orderJson.toString());
+
+            Request request = new Request.Builder()
+                    .url(url)
+                    .post(body)
+                    .build();
+
+            client.newCall(request).enqueue(new Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    runOnUiThread(() -> Toast.makeText(SelectAddressActivity.this, "提交订单失败", Toast.LENGTH_SHORT).show());
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    if (response.isSuccessful()) {
+                        runOnUiThread(() -> Toast.makeText(SelectAddressActivity.this, "订单提交成功", Toast.LENGTH_SHORT).show());
+                        Intent intent = new Intent(SelectAddressActivity.this, MainActivity_main.class);
+                        startActivity(intent);
+                        finish();
+
+                    }
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "创建订单失败", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private static class AddressItem {
         String consignee;
         String phone;
@@ -329,7 +413,6 @@ public class SelectAddressActivity extends AppCompatActivity {
                 if (isChecked) {
                     selectedAddressPosition = position;
                     notifyDataSetChanged();
-                    Log.d("SelectedAddressID", "Selected Address ID: " + addressItem.id);
                 }
             });
 

@@ -9,7 +9,7 @@
         android:id="@+id/addAddressButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="新增地址" />
+        android:text="주소 추가" />
 
     <LinearLayout
         android:id="@+id/addressInputLayout"
@@ -23,13 +23,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="输入地址" />
+            android:hint="주소를 입력해 주세요" />
 
         <Button
             android:id="@+id/confirmButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="确认" />
+            android:text="확인" />
     </LinearLayout>
 
     <TextView
@@ -37,13 +37,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:text="收货地址:" />
+        android:text="주소：" />
 
     <TextView
         android:id="@+id/noAddressTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="没有地址"
+        android:text="주소 없음"
         android:gravity="center"
         android:visibility="gone"
         android:padding="16dp" />
@@ -60,7 +60,7 @@
         android:id="@+id/selectedItemsTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="已选择的商品" />
+        android:text="선택된 상품：" />
 
     <ListView
         android:id="@+id/selectedItemsListView"
@@ -72,18 +72,18 @@
         android:id="@+id/totalPriceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="总金额: " />
+        android:text="총 금액 :" />
 
     <EditText
         android:id="@+id/remark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="订单备注" />
+        android:hint="주문서 비고：" />
 
     <Button
         android:id="@+id/payButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="支付" />
+        android:text="결제" />
 
 </LinearLayout>

@@ -149,10 +149,15 @@ public class MainActivity_login extends AppCompatActivity {
                             user.setId(userId);
                             user.setPhone(userPhone);
 
+                            long userId1 = Long.parseLong(userId);
+
+
                             // 保存登陆的id
                             SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("userId", userId);
+                            editor.putLong("userIdLong", userId1);
+
                             editor.apply();
 
 

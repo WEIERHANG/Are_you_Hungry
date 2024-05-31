@@ -28,7 +28,7 @@
             android:layout_gravity="fill_vertical"
             android:layout_weight="1"
             android:gravity="center|start"
-            android:text="   清空"
+            android:text="비우다"
             android:textColor="#FDFAFA"
             android:textSize="18sp" />
 
@@ -38,10 +38,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="购物车"
+            android:text="쇼핑 카트"
             android:textColor="#F6F5F5"
             android:textSize="20sp" />
-
         <TextView
             android:id="@+id/delect"
             android:layout_width="wrap_content"
@@ -77,7 +76,7 @@
             android:id="@+id/checkBoxall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="全选"
+            android:text="모두 선택"
             android:textColor="#FF9800" />
 
         <TextView
@@ -86,7 +85,7 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/checkBoxall"
             android:layout_marginStart="20dp"
-            android:text="结算的价钱"
+            android:text="결제 가격："
             android:textColor="#FF9800" />
 
         <TextView
@@ -103,6 +102,6 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:text="结算"/>
+            android:text="결제"/>
     </RelativeLayout>
 </RelativeLayout>

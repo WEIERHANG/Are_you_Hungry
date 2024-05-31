@@ -5,10 +5,14 @@ import android.content.res.AssetManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.hangandkai.areyouhungry.R;
@@ -88,8 +92,32 @@ public class MainActivity_main extends AppCompatActivity {
             }
         });
 
-
-
+        ImageView avatar = findViewById(R.id.avatar);
+        avatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPopupMenu(v);
+            }
+        });
+    }
+    private void showPopupMenu(View view) {
+        PopupMenu popupMenu = new PopupMenu(this, view);
+        popupMenu.getMenuInflater().inflate(R.menu.menu_main, popupMenu.getMenu());
+        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_order_history:
+                        // 启动历史订单查询活动
+                        Intent historyIntent = new Intent(MainActivity_main.this, OrderHistoryActivity.class);
+                        startActivity(historyIntent);
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+        popupMenu.show();
     }
 
     private void fetchMenuItems() {

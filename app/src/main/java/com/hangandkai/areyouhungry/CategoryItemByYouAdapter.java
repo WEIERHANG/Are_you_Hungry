@@ -90,7 +90,6 @@ public class CategoryItemByYouAdapter extends ArrayAdapter<MainActivity_main.Cat
                     .load("https://gitee.com/lucky_h/img/raw/master/" + item.image)
                     .into(holder.imageView);
 
-            Log.d("图片", item.image);
 
             // 获取当前项目的数量
             int count = itemCounts.containsKey(item.name) ? itemCounts.get(item.name) : 0;
@@ -99,7 +98,6 @@ public class CategoryItemByYouAdapter extends ArrayAdapter<MainActivity_main.Cat
             holder.minusIcon.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
 
             holder.cartIcon.setOnClickListener(v -> {
-                Log.d("点击了添加购物车图片", "------------------");
                 int newCount = itemCounts.containsKey(item.name) ? itemCounts.get(item.name) : 0;
                 newCount++;
                 itemCounts.put(item.name, newCount);
@@ -113,38 +111,18 @@ public class CategoryItemByYouAdapter extends ArrayAdapter<MainActivity_main.Cat
                 SharedPreferences sharedPreferences = mContext.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
                 userId = sharedPreferences.getString("userId", null);
 
-                Log.d("----购物车的用户id----：",userId);
-                // 封装成ShoppingCart对象并保存
+                 // 封装成ShoppingCart对象并保存
                 ShoppingCart cartItem = new ShoppingCart(
                         null, // 假设ID自动生成或另行处理
                         item.name,
-                        userId, // 用户ID，假设为1
+                        userId,
                         null, // dishId，可根据需要设置
                         null, // setmealId，可根据需要设置
                         newCount,
                         new BigDecimal(item.price),
                         item.image
                 );
-                // 检查购物车中是否已有相同商品
-//                boolean itemExists = false;
-//                for (ShoppingCart existingCartItem : cartItems) {
-//                    if (existingCartItem.getName().equals(cartItem.getName())) {
-//                        existingCartItem.setNumber(newCount);
-//                        itemExists = true;
-//                        break;
-//                    }
-//                }
-//                if (!itemExists) {
-//                    cartItems.add(cartItem);
-//                }
                 sendCartItemToServer(cartItem);
-
-
-
-//                cartItems.add(cartItem);
-
-                // 打印输出ShoppingCart对象
-                Log.d("ShoppingCart", "添加到购物车: " + cartItem.toString());
                 showCartItems();
             });
 
@@ -160,7 +138,6 @@ public class CategoryItemByYouAdapter extends ArrayAdapter<MainActivity_main.Cat
                     }
                     totalItems--; // 减少总商品数量
                     updateCartItemCount(holder.cartItemCountView);
-
                     // 更新ShoppingCart对象数量
                     for (ShoppingCart cartItem : cartItems) {
                         if (cartItem.getName().equals(item.name)) {
@@ -242,10 +219,6 @@ public class CategoryItemByYouAdapter extends ArrayAdapter<MainActivity_main.Cat
             }
         });
     }
-
-
-
-
     static class ViewHolder {
         ImageView imageView;
         TextView nameView;

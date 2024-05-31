@@ -14,5 +14,5 @@
         android:id="@+id/addressInfoTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="姓名：手机号，地址，标签" />
+        android:text="姓名,手机号，地址，标签" />
 </LinearLayout>

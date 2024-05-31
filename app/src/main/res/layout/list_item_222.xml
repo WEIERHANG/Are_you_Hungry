@@ -4,11 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#f9f9f9">
-
-    <!-- 头像框 -->
-
     <!-- 餐厅信息部分 -->
-
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="48dp"
@@ -92,7 +88,7 @@
             android:id="@+id/cartItemCount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="购物车商品数: 0"
+            android:text="장바구니 상품 수: 0"
             android:textSize="18sp"
             android:textColor="#000000"
             android:textStyle="bold"
@@ -103,7 +99,7 @@
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="购物车"
+            android:text="장바구니"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
             android:background="#FF6200EE"

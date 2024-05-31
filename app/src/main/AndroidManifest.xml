@@ -38,11 +38,11 @@
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 <!--        声明-->
         <activity android:name=".MainActivity_main" />
-
         <activity android:name=".OrderConfirmationActivity" />
         <activity android:name=".SelectAddressActivity" />
         <activity android:name=".ConfigUtils" />
         <activity android:name=".MainActivity_login" />
+        <activity android:name=".OrderHistoryActivity" />
 
 
 

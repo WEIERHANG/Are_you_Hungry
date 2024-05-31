@@ -90,13 +90,11 @@ public class CarAdapter extends ArrayAdapter<OrderConfirmationActivity.CategoryI
                                 .placeholder(R.drawable.must_buy_three) // 占位符图片
                                 .error(R.drawable.must_buy_three)) // 错误占位符
                         .into(holder.image);
-                Log.d("图片 URL", imageUrl);
             } else {
                 holder.image.setImageResource(R.drawable.must_buy_three); // 设置一个默认的占位图
             }
 
-            // 设置CheckBox状态和监听器
-            holder.checkbox.setOnCheckedChangeListener(null);
+             holder.checkbox.setOnCheckedChangeListener(null);
             holder.checkbox.setChecked(item.isSelected);
             holder.checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
                 item.isSelected = isChecked;
