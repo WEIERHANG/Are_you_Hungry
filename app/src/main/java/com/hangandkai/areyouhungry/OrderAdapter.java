@@ -58,20 +58,20 @@ public class OrderAdapter extends BaseAdapter {
         LinearLayout subOrderLayout = convertView.findViewById(R.id.subOrderLayout);
 
         // 设置订单的基本信息
-        orderIdTextView.setText("订单ID: " + order.getOrderId());
+        orderIdTextView.setText("주문번호 : " + order.getOrderId());
 
         // 将时间戳转换为日期字符串
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String orderTime = sdf.format(new Date(order.getOrderTime()));
-        orderTimeTextView.setText("时间: " + orderTime);
+        orderTimeTextView.setText("시간 : " + orderTime);
 
-        amountTextView.setText("总金额: " + order.getTotalAmount());
+        amountTextView.setText("총액: " + order.getTotalAmount());
 
-        statusTextView.setText("状态: " + order.getStatusString());
+        statusTextView.setText("상태: " + order.getStatusString());
 
-        addressTextView.setText("地址: " + order.getAddress());
-        consigneeTextView.setText("收货人: " + order.getConsignee());
-        remarkTextView.setText("备注: " + order.getRemark());
+        addressTextView.setText("주소: " + order.getAddress());
+        consigneeTextView.setText("이름: " + order.getConsignee());
+        remarkTextView.setText("설명: " + order.getRemark());
 
         // 设置展开和折叠逻辑
         subOrderLayout.removeAllViews();
@@ -88,7 +88,7 @@ public class OrderAdapter extends BaseAdapter {
                 ImageView subOrderImageView = subOrderView.findViewById(R.id.subOrderImageView);
 
                 subOrderNameTextView.setText(productName);
-                subOrderQuantityTextView.setText("数量: " + quantity + "个");
+                subOrderQuantityTextView.setText("수량: " + quantity);
 
                 // 假设所有相同名称的商品图片相同，加载第一个相同名称的商品图片
                 for (OrderItem subOrder : order.getSubOrders()) {

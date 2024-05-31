@@ -9,43 +9,43 @@
         android:id="@+id/orderIdTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="订单ID" />
+        android:text="주문번호 " />
 
     <TextView
         android:id="@+id/amountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="总金额" />
+        android:text="총액 " />
 
     <TextView
         android:id="@+id/orderTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="时间" />
+        android:text="시간 " />
 
     <TextView
         android:id="@+id/statusTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="状态" />
+        android:text="상태 " />
 
     <TextView
         android:id="@+id/addressTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="地址" />
+        android:text="주소 " />
 
     <TextView
         android:id="@+id/consigneeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="收货人" />
+        android:text="이름 " />
 
     <TextView
         android:id="@+id/remarkTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="备注" />
+        android:text="비고 " />
 
     <LinearLayout
         android:id="@+id/subOrderLayout"

@@ -39,7 +39,7 @@
                 android:id="@+id/myUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="请输入手机号"
+                android:hint="핸드폰 번호를 입력해 주세요"
                 >
             </EditText>
         </RelativeLayout>
@@ -63,7 +63,7 @@
                 android:layout_toRightOf="@+id/pawTemp"
                 android:id="@+id/myPassword"
                 android:layout_width="match_parent"
-                android:hint="请输入验证码"
+                android:hint="인증번호를 입력해 주세요"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
         </RelativeLayout>
@@ -79,7 +79,7 @@
                 android:id="@+id/LoginBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登录"
+                android:text="로그인"
                 android:textStyle="bold"
                 android:background="@drawable/btn_circle_shape1"
                 ></Button>
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:background="@drawable/btn_circle_shape1"
-                android:text="获取验证码"></Button>
+                android:text="인증 번호 가져오기"></Button>
         </RelativeLayout>
     </LinearLayout>
 

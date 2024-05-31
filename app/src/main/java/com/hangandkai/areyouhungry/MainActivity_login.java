@@ -1,4 +1,5 @@
 package com.hangandkai.areyouhungry;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -32,8 +33,6 @@ public class MainActivity_login extends AppCompatActivity {
     private String baseUrl;
     private Context context;
 
-
-
     private void loadConfig() {
         Properties properties = new Properties();
         InputStream input = null;
@@ -62,31 +61,30 @@ public class MainActivity_login extends AppCompatActivity {
         setContentView(R.layout.fragment_login);
         final EditText username = findViewById(R.id.myUserName);
         final EditText password = findViewById(R.id.myPassword);
+        password.setInputType(android.text.InputType.TYPE_CLASS_TEXT); // 设置为明文显示
         Button submit = findViewById(R.id.LoginBtn);
         Button code_Login = findViewById(R.id.RegisterBtn);
         loadConfig();
 
-
-
         submit.setOnClickListener(view -> {
             if (TextUtils.isEmpty(username.getText())) {
-                Toast.makeText(MainActivity_login.this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity_login.this, "핸드폰 번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(password.getText())) {
-                Toast.makeText(MainActivity_login.this, "请输入密码", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity_login.this, "인증번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
             } else {
                 usernames = username.getText().toString();
                 passwords = password.getText().toString();
                 if (loginCode1 != null) {
                     okhttpData();
                 } else {
-                    Toast.makeText(MainActivity_login.this, "请先获取验证码", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity_login.this, "인증번호를 먼저 받으십시오", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         code_Login.setOnClickListener(view -> {
             if (TextUtils.isEmpty(username.getText())) {
-                Toast.makeText(MainActivity_login.this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity_login.this, "핸드폰 번호를 입력해 주세요", Toast.LENGTH_SHORT).show();
             } else {
                 usernames = username.getText().toString();
                 requestVerificationCode(usernames);
@@ -94,12 +92,8 @@ public class MainActivity_login extends AppCompatActivity {
         });
     }
 
-
-
-
     private void okhttpData() {
-        Log.i("ddddd------dddd--yzm验证码", loginCode1 != null ? loginCode1 : "loginCode1 is null");
-
+        Log.i("로그인 코드:", loginCode1 != null ? loginCode1 : "loginCode1 is null");
 
         new Thread(() -> {
             if (usernames != null && loginCode1 != null) {
@@ -110,12 +104,12 @@ public class MainActivity_login extends AppCompatActivity {
                         .build();
                 Request request = new Request.Builder()
                         .post(formBody)
-                        .url(baseUrl+"/user/login/")
+                        .url(baseUrl + "/user/login/")
                         .build();
                 client.newCall(request).enqueue(new Callback() {
                     @Override
                     public void onFailure(Call call, IOException e) {
-                        runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "网络请求失败", Toast.LENGTH_SHORT).show());
+                        runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "네트워크 요청 실패", Toast.LENGTH_SHORT).show());
                     }
 
                     @Override
@@ -126,7 +120,7 @@ public class MainActivity_login extends AppCompatActivity {
                     }
                 });
             } else {
-                runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "用户名或验证码不能为空", Toast.LENGTH_SHORT).show());
+                runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "사용자 이름이나 인증 번호는 비워 둘 수 없습니다", Toast.LENGTH_SHORT).show());
             }
         }).start();
     }
@@ -137,7 +131,7 @@ public class MainActivity_login extends AppCompatActivity {
                 JSONObject jsonObject = new JSONObject(jsondata);
                 JSONObject mapObject = jsonObject.getJSONObject("map");
                 String data1 = mapObject.getString("sss");
-                Log.i("--*****-验证码::-------", data1);
+                Log.i("인증 코드:", data1);
                 runOnUiThread(() -> {
                     if ("1".equals(data1)) {
                         try {
@@ -151,7 +145,6 @@ public class MainActivity_login extends AppCompatActivity {
 
                             long userId1 = Long.parseLong(userId);
 
-
                             // 保存登陆的id
                             SharedPreferences sharedPreferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -160,22 +153,18 @@ public class MainActivity_login extends AppCompatActivity {
 
                             editor.apply();
 
-
                             // 输出mapObject内容和userID
                             Log.d("MapObject", "MapObject Content: " + jsonObject.toString());
-                            Log.d("UserID", "User ID: " + userId+"---"+userPhone);
-
-
-                            Toast.makeText(MainActivity_login.this, "登录成功", Toast.LENGTH_SHORT).show();
+                            Log.d("UserID", "User ID: " + userId + "---" + userPhone);
                             Intent intent = new Intent(MainActivity_login.this, MainActivity_main.class);
                             intent.putExtra("user", user);
                             startActivity(intent);
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(MainActivity_login.this, "无法获取用户ID", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity_login.this, "서버에 오류가 발생했습니다", Toast.LENGTH_SHORT).show();
                         }
                     } else {
-                        Toast.makeText(MainActivity_login.this, "用户名或密码不正确", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity_login.this, "인증번호가 잘못되었습니다.", Toast.LENGTH_SHORT).show();
                     }
                 });
             } catch (JSONException e) {
@@ -183,7 +172,6 @@ public class MainActivity_login extends AppCompatActivity {
             }
         }
     }
-
 
     private void requestVerificationCode(String phoneNumber) {
         new Thread(() -> {
@@ -193,12 +181,12 @@ public class MainActivity_login extends AppCompatActivity {
                     .build();
             Request request = new Request.Builder()
                     .post(formBody)
-                    .url(baseUrl+"/user/sendMsg/")
+                    .url(baseUrl + "/user/sendMsg/")
                     .build();
             client.newCall(request).enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "获取验证码失败", Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "인증 번호를 가져오지 못했습니다", Toast.LENGTH_SHORT).show());
                 }
 
                 @Override
@@ -222,7 +210,7 @@ public class MainActivity_login extends AppCompatActivity {
                     JSONObject mapObject = jsonObject.getJSONObject("map");
                     String loginCode = mapObject.getString("loginCode");
                     loginCode1 = loginCode;
-                    runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "验证码：" + loginCode, Toast.LENGTH_SHORT).show());
+                    runOnUiThread(() -> Toast.makeText(MainActivity_login.this, "인증 번호: " + loginCode, Toast.LENGTH_SHORT).show());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

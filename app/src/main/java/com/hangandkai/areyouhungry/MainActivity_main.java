@@ -146,7 +146,6 @@ public class MainActivity_main extends AppCompatActivity {
                         for (CategoryItem item : dataResponse.data) {
                             categoryItems.add(item);
                             menuNames.add(item.name);
-                            Log.i("API调用成功", "Loaded ID: " + item.id + " with name: " + item.name);
                         }
                         adapter.notifyDataSetChanged();
                         menuGrid.setAdapter(adapter);

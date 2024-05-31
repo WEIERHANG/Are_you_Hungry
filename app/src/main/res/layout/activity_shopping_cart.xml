@@ -28,7 +28,7 @@
             android:layout_gravity="fill_vertical"
             android:layout_weight="1"
             android:gravity="center|start"
-            android:text="비우다"
+            android:text="   비우다"
             android:textColor="#FDFAFA"
             android:textSize="18sp" />
 
@@ -38,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="쇼핑 카트"
+            android:text="장바구니"
             android:textColor="#F6F5F5"
             android:textSize="20sp" />
         <TextView
@@ -47,7 +47,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center|end"
-            android:text="删除   "
+            android:text="삭제   "
             android:textColor="#F6F5F5"
             android:textSize="18sp" />
     </LinearLayout>
