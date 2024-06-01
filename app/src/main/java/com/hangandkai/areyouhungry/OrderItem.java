@@ -1,5 +1,7 @@
 package com.hangandkai.areyouhungry;
 
+import android.os.Build;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -146,8 +148,10 @@ public class OrderItem {
         Map<String, Integer> productQuantities = new HashMap<>();
         if (subOrders != null) {
             for (OrderItem subOrder : subOrders) {
-                productQuantities.put(subOrder.getName(),
-                        productQuantities.getOrDefault(subOrder.getName(), 0) + subOrder.getNumber());
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    productQuantities.put(subOrder.getName(),
+                            productQuantities.getOrDefault(subOrder.getName(), 1) + subOrder.getNumber());
+                }
             }
         }
         return productQuantities;

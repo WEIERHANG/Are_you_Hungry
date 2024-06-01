@@ -17,11 +17,33 @@
         android:layout_height="wrap_content"
         android:hint="휴대폰 번호" />
 
-    <EditText
-        android:id="@+id/sexEditText"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="성별" />
+        android:text="성별"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp" />
+
+    <RadioGroup
+        android:id="@+id/sexRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/maleRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="남"
+            android:tag="1" />
+
+        <RadioButton
+            android:id="@+id/femaleRadioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="여"
+            android:tag="0" />
+    </RadioGroup>
 
     <EditText
         android:id="@+id/detailEditText"

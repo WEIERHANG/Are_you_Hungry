@@ -1,4 +1,4 @@
-package com.hangandkai.areyouhungry;// SelectAddressActivity.java
+package com.hangandkai.areyouhungry;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -224,7 +225,7 @@ public class SelectAddressActivity extends AppCompatActivity {
         View dialogView = inflater.inflate(R.layout.dialog_add_address, null);
         final EditText consigneeEditText = dialogView.findViewById(R.id.consigneeEditText);
         final EditText phoneEditText = dialogView.findViewById(R.id.phoneEditText);
-        final EditText sexEditText = dialogView.findViewById(R.id.sexEditText);
+        final RadioGroup sexRadioGroup = dialogView.findViewById(R.id.sexRadioGroup);
         final EditText detailEditText = dialogView.findViewById(R.id.detailEditText);
         final EditText labelEditText = dialogView.findViewById(R.id.labelEditText);
         Button finishButton = dialogView.findViewById(R.id.finishButton);
@@ -238,11 +239,13 @@ public class SelectAddressActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String consignee = consigneeEditText.getText().toString().trim();
                 String phone = phoneEditText.getText().toString().trim();
-                String sex = sexEditText.getText().toString().trim();
+                int selectedId = sexRadioGroup.getCheckedRadioButtonId();
+                RadioButton selectedRadioButton = dialogView.findViewById(selectedId);
+                int sex = Integer.parseInt((String) selectedRadioButton.getTag());
                 String detail = detailEditText.getText().toString().trim();
                 String label = labelEditText.getText().toString().trim();
 
-                if (!consignee.isEmpty() && !phone.isEmpty() && !sex.isEmpty() && !detail.isEmpty() && !label.isEmpty()) {
+                if (!consignee.isEmpty() && !phone.isEmpty() && selectedId != -1 && !detail.isEmpty() && !label.isEmpty()) {
                     addNewAddress(consignee, phone, sex, detail, label);
                     dialog.dismiss();
                 } else {
@@ -254,7 +257,7 @@ public class SelectAddressActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    private void addNewAddress(String consignee, String phone, String sex, String detail, String label) {
+    private void addNewAddress(String consignee, String phone, int sex, String detail, String label) {
         String url = baseUrl1 + "/addressBook";
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject json = new JSONObject();
@@ -317,15 +320,8 @@ public class SelectAddressActivity extends AppCompatActivity {
             orderJson.put("userId", userIdLong);
             orderJson.put("addressBookId", selectedAddress.id);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
-
-
                 orderJson.put("orderTime", LocalDateTime.now().format(formatter));
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss");
-
                 orderJson.put("checkoutTime", LocalDateTime.now().format(formatter));
             }
             orderJson.put("amount", new BigDecimal(totalPrice));
@@ -358,7 +354,6 @@ public class SelectAddressActivity extends AppCompatActivity {
                         Intent intent = new Intent(SelectAddressActivity.this, MainActivity_main.class);
                         startActivity(intent);
                         finish();
-
                     }
                 }
             });
