@@ -335,7 +335,6 @@ public class SelectAddressActivity extends AppCompatActivity {
             String url = baseUrl1 + "/order/submit";
             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             RequestBody body = RequestBody.create(JSON, orderJson.toString());
-
             Request request = new Request.Builder()
                     .url(url)
                     .post(body)

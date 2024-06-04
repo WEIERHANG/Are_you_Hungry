@@ -95,12 +95,13 @@ public class MainActivity_login extends AppCompatActivity {
     private void okhttpData() {
         Log.i("로그인 코드:", loginCode1 != null ? loginCode1 : "loginCode1 is null");
 
+
         new Thread(() -> {
             if (usernames != null && loginCode1 != null) {
                 OkHttpClient client = new OkHttpClient();
                 FormBody formBody = new FormBody.Builder()
                         .add("phone", usernames)
-                        .add("code", loginCode1)
+                        .add("code", passwords)
                         .build();
                 Request request = new Request.Builder()
                         .post(formBody)
